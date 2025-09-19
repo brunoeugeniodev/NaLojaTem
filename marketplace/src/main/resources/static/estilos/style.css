@@ -1,0 +1,179 @@
+:root {
+    --primary-blue: #1a73e8;
+    --primary-orange: #ff8a65;
+    /* Alterado para um gradiente vertical */
+    --gradient-main: linear-gradient(180deg, #ff8a65, #ff4db8, #1a73e8);
+    --dark: #333;
+    --light: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+/* Cabeçalho */
+header {
+    background: var(--gradient-main);
+    color: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.header-top {
+    display: flex;
+    /* Alinha o conteúdo nas extremidades */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo img {
+    /* Ajustado para um tamanho maior */
+    height: 70px;
+    width: auto;
+}
+
+/* Barra de busca */
+.search-bar {
+    display: flex;
+    /* Aumentado a largura para dar mais espaço */
+    flex-grow: 1;
+    margin: 0 20px; /* Adicionado margem para separar da logo e dos botões */
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 30px 0 0 30px;
+    outline: none;
+}
+
+.search-bar button {
+    padding: 12px 20px;
+    background: var(--gradient-main);
+    color: white;
+    border: none;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-bar button:hover {
+    filter: brightness(1.2);
+}
+
+/* Usuário e Carrinho */
+.user-actions {
+    display: flex; /* Transforma o container em um flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    /* Empurra o container para a direita, alinhando com o 'justify-content: space-between' */
+}
+
+.user-actions a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s;
+    white-space: nowrap; /* Evita quebra de linha */
+}
+
+.user-actions a:hover {
+    text-shadow: 0 0 8px #fff;
+}
+
+.cart-count {
+    background: var(--gradient-main);
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 5px;
+    color: #fff;
+}
+
+/* Menu */
+nav {
+    background: rgba(0,0,0,0.1);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+
+nav ul li {
+    padding: 15px 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    text-shadow: 0 0 8px #fff;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .search-bar {
+        width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-top {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-bar {
+        width: 100%;
+        order: 3;
+    }
+
+    .logo img {
+        height: 50px; /* Reduz o tamanho da logo para telas menores */
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+}

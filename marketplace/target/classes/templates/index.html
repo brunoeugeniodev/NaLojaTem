@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Na Loja Tem</title>
+    <link rel="stylesheet" th:href="@{/estilos/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div th:replace="paginas/cabecalho :: header"></div>
+
+<main style="padding: 20px; text-align: center;">
+    <h2>Conteúdo da Página</h2>
+    <p>O cabeçalho foi importado dinamicamente.</p>
+</main>
+
+<script th:src="@{/scripts/script.js}"></script>
+</body>
+</html>
