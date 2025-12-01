@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Loja | Na Loja Tem</title>
+    <link rel="stylesheet" th:href="@{/estilos/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="cabecalho :: header"></header>
+
+<main>
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-store"></i> Cadastrar Minha Loja</h1>
+            <p>Junte-se ao maior marketplace do Brasil e alcance milhares de clientes</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="step-indicator">
+            <div class="step-line"></div>
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+        </div>
+
+        <form id="store-form" class="form-container">
+            <!-- Passo 1: Informações Básicas -->
+            <div class="form-step active" id="step1">
+                <div class="step-header">
+                    <h2 class="step-title">Informações Básicas</h2>
+                    <p class="step-subtitle">Forneça as informações essenciais da sua loja para começar</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome-loja" class="required"><i class="fas fa-sign"></i> Nome da Loja:</label>
+                    <input type="text" id="nome-loja" name="nome" required
+                           placeholder="Ex: Minha Loja Online">
+                </div>
+
+                <div class="form-group">
+                    <label for="cnpj" class="required"><i class="fas fa-id-card"></i> CNPJ:</label>
+                    <input type="text" id="cnpj" name="cnpj" required
+                           placeholder="00.000.000/0000-00">
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao" class="required"><i class="fas fa-align-left"></i> Descrição da Loja:</label>
+                    <textarea id="descricao" name="descricao" required
+                              placeholder="Descreva sua loja, seus produtos e seu diferencial..."></textarea>
+                </div>
+
+                <div class="benefits-list">
+                    <h3><i class="fas fa-gift"></i> Benefícios de ter uma loja no Na Loja Tem</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Acesso a milhares de clientes</li>
+                        <li><i class="fas fa-check"></i> Sistema de pagamentos integrado</li>
+                        <li><i class="fas fa-check"></i> Gestão de pedidos simplificada</li>
+                        <li><i class="fas fa-check"></i> Suporte especializado</li>
+                        <li><i class="fas fa-check"></i> Sem mensalidade fixa</li>
+                    </ul>
+                </div>
+
+                <div class="form-actions">
+                    <div></div>
+                    <button type="button" class="btn-form btn-next">
+                        Próximo <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Passo 2: Endereço -->
+            <div class="form-step" id="step2">
+                <div class="step-header">
+                    <h2 class="step-title">Endereço da Loja</h2>
+                    <p class="step-subtitle">Informe o endereço da sua loja</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="rua" class="required"><i class="fas fa-road"></i> Rua:</label>
+                    <input type="text" id="rua" name="rua" required
+                           placeholder="Nome da rua">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="numero" class="required"><i class="fas fa-hashtag"></i> Número:</label>
+                        <input type="text" id="numero" name="numero" required
+                               placeholder="Número">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bairro" class="required"><i class="fas fa-location-dot"></i> Bairro:</label>
+                        <input type="text" id="bairro" name="bairro" required
+                               placeholder="Nome do bairro">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cidade" class="required"><i class="fas fa-city"></i> Cidade:</label>
+                        <input type="text" id="cidade" name="cidade" required
+                               placeholder="Nome da cidade">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado" class="required"><i class="fas fa-map"></i> Estado:</label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-form btn-prev">
+                        <i class="fas fa-arrow-left"></i> Anterior
+                    </button>
+                    <button type="button" class="btn-form btn-next">
+                        Próximo <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Passo 3: Logo da Loja -->
+            <div class="form-step" id="step3">
+                <div class="step-header">
+                    <h2 class="step-title">Logo da Loja</h2>
+                    <p class="step-subtitle">Adicione uma imagem para identificar sua loja</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="logo-loja"><i class="fas fa-image"></i> Logo da Loja (opcional):</label>
+                    <div class="file-upload">
+                        <input type="file" id="logo-loja" name="foto" accept="image/*">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Clique para fazer upload do logo<br>
+                            <small>Formatos: JPG, PNG. Tamanho máximo: 5MB</small></p>
+                        <img class="preview-image" alt="Prévia do logo">
+                    </div>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="aceitar-termos-loja" name="aceitarTermos" required>
+                    <label for="aceitar-termos-loja">
+                        Declaro que todas as informações fornecidas são verdadeiras e aceito os
+                        <a href="#">Termos de Uso</a> e <a href="#">Política de Comissões</a> do Na Loja Tem.
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-form btn-prev">
+                        <i class="fas fa-arrow-left"></i> Anterior
+                    </button>
+                    <button type="submit" class="btn-form btn-submit">
+                        <i class="fas fa-check"></i> Finalizar Cadastro
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer th:replace="rodape :: footer"></footer>
+
+<script th:src="@{/scripts/script.js}"></script>
+<script>
+    // Verifica se está logado
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            alert('Você precisa estar logado para cadastrar uma loja!');
+            window.location.href = '/login?redirect=' + encodeURIComponent('/cadastro-loja');
+            return;
+        }
+
+        // Inicializa máscaras
+        const cnpjInput = document.getElementById('cnpj');
+        if (cnpjInput) {
+            cnpjInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 14) {
+                    value = value.replace(/(\d{2})(\d)/, '$1.$2')
+                                .replace(/(\d{3})(\d)/, '$1.$2')
+                                .replace(/(\d{3})(\d)/, '$1/$2')
+                                .replace(/(\d{4})(\d)/, '$1-$2');
+                    e.target.value = value;
+                }
+            });
+        }
+
+        // Lógica do formulário passo a passo
+        const formSteps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step');
+        let currentStep = 0;
+
+        function showStep(stepIndex) {
+            formSteps.forEach((step, index) => {
+                step.classList.toggle('active', index === stepIndex);
+            });
+
+            stepIndicators.forEach((indicator, index) => {
+                indicator.classList.remove('active', 'completed');
+                if (index === stepIndex) {
+                    indicator.classList.add('active');
+                } else if (index < stepIndex) {
+                    indicator.classList.add('completed');
+                }
+            });
+
+            currentStep = stepIndex;
+        }
+
+        // Botões próximo/anterior
+        document.querySelectorAll('.btn-next').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (validateStep(currentStep)) {
+                    if (currentStep < formSteps.length - 1) {
+                        showStep(currentStep + 1);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.btn-prev').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentStep > 0) {
+                    showStep(currentStep - 1);
+                }
+            });
+        });
+
+        function validateStep(stepIndex) {
+            const currentFormStep = formSteps[stepIndex];
+            const requiredInputs = currentFormStep.querySelectorAll('[required]');
+
+            for (let input of requiredInputs) {
+                if (!input.value.trim()) {
+                    alert(`Por favor, preencha o campo: ${input.previousElementSibling?.textContent || 'obrigatório'}`);
+                    input.focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Submit do formulário
+        document.getElementById('store-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!validateStep(currentStep)) {
+                showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
+                return;
+            }
+
+            const button = this.querySelector('.btn-submit');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
+            button.disabled = true;
+
+            // Coleta dados do formulário
+            const formData = new FormData();
+            formData.append('nome', document.getElementById('nome-loja').value);
+            formData.append('cnpj', document.getElementById('cnpj').value);
+            formData.append('descricao', document.getElementById('descricao').value);
+            formData.append('rua', document.getElementById('rua').value);
+            formData.append('numero', document.getElementById('numero').value);
+            formData.append('bairro', document.getElementById('bairro').value);
+            formData.append('cidade', document.getElementById('cidade').value);
+            formData.append('estado', document.getElementById('estado').value);
+
+            const fotoFile = document.getElementById('logo-loja').files[0];
+            if (fotoFile) {
+                formData.append('foto', fotoFile);
+            }
+
+            // Envia para API
+            fetch('/api/lojas/cadastrar', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                showNotification('Loja cadastrada com sucesso!', 'success');
+
+                setTimeout(() => {
+                    window.location.href = '/minha-loja';
+                }, 2000);
+            })
+            .catch(error => {
+                showNotification('Erro ao cadastrar loja: ' + error.message, 'error');
+                button.innerHTML = originalText;
+                button.disabled = false;
+            });
+        });
+    });
+</script>
+</body>
+</html>
