@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Na Loja Tem</title>
+    <link rel="stylesheet" th:href="@{/estilos/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="cabecalho :: header"></header>
+
+<main class="auth-container">
+    <div class="auth-box">
+        <h2><i class="fas fa-sign-in-alt"></i> Entrar na Conta</h2>
+
+        <div id="login-message" style="display: none;" class="alert">
+            <!-- Mensagens serão inseridas aqui via JavaScript -->
+        </div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email" class="required"><i class="fas fa-envelope"></i> Email:</label>
+                <input type="email" id="email" name="email" required
+                       placeholder="seu@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="required"><i class="fas fa-lock"></i> Senha:</label>
+                <input type="password" id="password" name="password" required
+                       placeholder="Sua senha">
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" id="remember" name="remember" style="width: auto; margin-right: 10px;">
+                <label for="remember" style="margin: 0;">Lembrar-me</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;" id="login-button">
+                <i class="fas fa-sign-in-alt"></i> Entrar na Conta
+            </button>
+        </form>
+
+        <div class="auth-links">
+            <p>Não tem conta? <a th:href="@{/registro}">Cadastre-se aqui</a></p>
+            <p><a href="#" id="forgot-password"><i class="fas fa-key"></i> Esqueci minha senha</a></p>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="rodape :: footer"></footer>
+
+<script th:src="@{/scripts/script.js}"></script>
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const button = document.getElementById('login-button');
+
+        // Salva estado do botão
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
+        button.disabled = true;
+
+        // Limpa mensagem anterior
+        const messageDiv = document.getElementById('login-message');
+        messageDiv.style.display = 'none';
+
+        // Faz login via API
+        fazerLogin(email, password)
+            .then(data => {
+                // Sucesso - o redirecionamento é feito dentro da função fazerLogin
+            })
+            .catch(error => {
+                // Mostra mensagem de erro
+                messageDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + error.message;
+                messageDiv.className = 'alert alert-error';
+                messageDiv.style.display = 'block';
+
+                // Restaura botão
+                button.innerHTML = originalText;
+                button.disabled = false;
+            });
+    });
+
+    // Verifica se já está logado
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            // Se já tem token, redireciona para home
+            window.location.href = '/';
+        }
+    });
+</script>
+</body>
+</html>

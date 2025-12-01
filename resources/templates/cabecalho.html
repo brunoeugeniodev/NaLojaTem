@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header th:fragment="header">
+    <div class="container">
+        <div class="header-top">
+            <div class="logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/imagens/Logo.png}" alt="Logo Na Loja Tem">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="O que você está procurando?">
+                <button id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="user-actions" id="user-actions-container">
+                <a th:href="@{/carrinho}"><i class="fas fa-shopping-cart"></i> Carrinho <span class="cart-count" id="cart-count">0</span></a>
+
+                <!-- O conteúdo será preenchido via JavaScript -->
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav>
+            <div class="container">
+                <ul id="nav-menu">
+                    <li><a th:href="@{/lojas}"><i class="fas fa-store"></i> Lojas</a></li>
+                    <li><a th:href="@{/ofertas}"><i class="fas fa-tag"></i> Ofertas</a></li>
+                    <li><a th:href="@{/lancamentos}"><i class="fas fa-bullhorn"></i> Lançamentos</a></li>
+                    <li><a th:href="@{/destaques}"><i class="fas fa-star"></i> Destaques</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<script>
+    // Script inline para renderizar dinamicamente os botões de usuário
+    document.addEventListener('DOMContentLoaded', function() {
+        const userActionsContainer = document.getElementById('user-actions-container');
+        if (userActionsContainer) {
+            const token = localStorage.getItem('jwtToken');
+            const usuario = localStorage.getItem('usuario');
+
+            if (token && usuario) {
+                try {
+                    const userData = JSON.parse(usuario);
+                    userActionsContainer.innerHTML += `
+                        <a href="/minha-loja"><i class="fas fa-user-circle"></i> Minha Conta</a>
+                        <a href="#" id="logout-btn" onclick="fazerLogout()"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    `;
+                } catch (e) {
+                    // Fallback para não logado
+                    userActionsContainer.innerHTML += `
+                        <a href="/login" id="login-btn"><i class="fas fa-user"></i> Entrar</a>
+                    `;
+                }
+            } else {
+                userActionsContainer.innerHTML += `
+                    <a href="/login" id="login-btn"><i class="fas fa-user"></i> Entrar</a>
+                `;
+            }
+        }
+    });
+</script>
+</body>
+</html>
