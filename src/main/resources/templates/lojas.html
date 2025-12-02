@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lojas | Na Loja Tem</title>
+    <!-- CSS Globais -->
+    <link rel="stylesheet" th:href="@{/estilos/style.css}">
+    <!-- CSS Específico de Lojas -->
+    <link rel="stylesheet" th:href="@{/estilos/lojas.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="cabecalho :: header"></header>
+
+<main>
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-store"></i> Nossas Lojas</h1>
+            <p>Descubra as melhores lojas do marketplace com produtos exclusivos e atendimento especializado</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <form th:action="@{/lojas}" method="get" class="filters">
+            <div class="filter-group">
+                <label for="categoria"><i class="fas fa-filter"></i> Categoria</label>
+                <select id="categoria" name="categoria">
+                    <option value="">Todas as categorias</option>
+                    <option value="moda">Moda</option>
+                    <option value="eletronicos">Eletrônicos</option>
+                    <option value="casa">Casa e Decoração</option>
+                    <option value="esporte">Esportes</option>
+                    <option value="beleza">Beleza</option>
+                    <option value="livros">Livros</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="localizacao"><i class="fas fa-map-marker-alt"></i> Localização</label>
+                <input type="text" id="localizacao" name="localizacao" placeholder="Cidade, Estado ou CEP">
+            </div>
+
+            <div class="filter-group">
+                <label for="ordenacao"><i class="fas fa-sort"></i> Ordenar por</label>
+                <select id="ordenacao" name="ordenacao">
+                    <option value="relevancia">Mais relevantes</option>
+                    <option value="avaliacao">Melhores avaliações</option>
+                    <option value="novas">Mais novas</option>
+                    <option value="nome">Nome (A-Z)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-filter" id="btn-filtrar">Filtrar</button>
+        </form>
+
+        <div class="lojas-list" th:if="${not #lists.isEmpty(lojas)}">
+            <div class="loja-item" th:each="loja : ${lojas}">
+                <div class="loja-header">
+                    <img th:src="${loja.foto != null ? loja.foto : '/imagens/placeholder_loja.png'}"
+                         class="loja-logo" th:alt="${loja.nome}">
+                    <div class="loja-info">
+                        <h3 class="loja-title" th:text="${loja.nome}">Nome da Loja</h3>
+                        <div class="loja-category" th:text="${loja.categoria != null ? loja.categoria : 'Geral'}">Categoria</div>
+                        <div class="loja-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(124 avaliações)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="loja-body">
+                    <p class="loja-description" th:text="${loja.descricao ?: 'Loja especializada em produtos de qualidade com entrega rápida e atendimento personalizado.'}">
+                        Descrição da loja
+                    </p>
+
+                    <ul class="loja-features">
+                        <li><i class="fas fa-shipping-fast"></i> Entrega em até 2 dias úteis</li>
+                        <li><i class="fas fa-credit-card"></i> Parcelamento em até 12x</li>
+                        <li><i class="fas fa-headset"></i> Atendimento 24/7</li>
+                    </ul>
+
+                    <a th:href="@{/loja/{id}(id=${loja.id})}" class="btn-visitar">
+                        <i class="fas fa-external-link-alt"></i> Visitar Loja
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(lojas)}" class="empty-state">
+            <i class="fas fa-store-slash"></i>
+            <h3>Nenhuma loja encontrada</h3>
+            <p>No momento não há lojas cadastradas no marketplace. Que tal ser o primeiro?</p>
+            <a th:href="@{/cadastro-loja}" class="btn btn-primary mt-20">
+                <i class="fas fa-store"></i> Cadastrar Minha Loja
+            </a>
+        </div>
+
+        <div class="pagination" th:if="${totalPaginas > 1}">
+            <a th:href="@{/lojas(pagina=0)}" th:class="${paginaAtual == 0 ? 'active' : ''}">1</a>
+            <a th:each="p : ${#numbers.sequence(1, totalPaginas-1)}"
+               th:href="@{/lojas(pagina=${p})}"
+               th:text="${p+1}"
+               th:class="${paginaAtual == p ? 'active' : ''}"></a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="rodape :: footer"></footer>
+
+<!-- Scripts Globais -->
+<script th:src="@{/scripts/global.js}"></script>
+<!-- Scripts Específicos de Lojas -->
+<script th:src="@{/scripts/lojas.js}"></script>
+</body>
+</html>

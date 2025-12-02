@@ -1,0 +1,177 @@
+/* PÁGINA CADASTRO LOJA */
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ddd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    margin: 0 50px;
+}
+
+.step.active {
+    background: var(--primary-blue);
+}
+
+.step.completed {
+    background: var(--primary-orange);
+}
+
+.step-line {
+    position: absolute;
+    top: 20px;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: #ddd;
+    z-index: 0;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
+
+.step-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.step-title {
+    font-size: 1.6rem;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.step-subtitle {
+    color: var(--gray-color);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.file-upload {
+    border: 2px dashed #ddd;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.file-upload:hover {
+    border-color: var(--primary-blue);
+    background: rgba(26, 115, 232, 0.05);
+}
+
+.file-upload i {
+    font-size: 3rem;
+    color: var(--gray-color);
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.file-upload input {
+    display: none;
+}
+
+.preview-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: none;
+    border: 2px solid #ddd;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-form {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.btn-prev {
+    background: #f8f9fa;
+    color: var(--dark-color);
+}
+
+.btn-prev:hover {
+    background: #e9ecef;
+}
+
+.btn-next,
+.btn-submit {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.btn-next:hover,
+.btn-submit:hover {
+    background: #1565c0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 115, 232, 0.2);
+}
+
+.benefits-list {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.benefits-list h3 {
+    margin-bottom: 15px;
+    color: var(--dark-color);
+    font-size: 1.2rem;
+}
+
+.benefits-list ul {
+    list-style: none;
+}
+
+.benefits-list li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.benefits-list i {
+    color: var(--primary-orange);
+}

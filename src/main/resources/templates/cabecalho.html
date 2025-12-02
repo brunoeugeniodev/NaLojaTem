@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<header th:fragment="header">
+    <div class="container">
+        <div class="header-top">
+            <div class="logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/imagens/Logo.png}" alt="Logo Na Loja Tem" class="logo-img">
+                </a>
+            </div>
+            <div class="search-bar">
+                <form th:action="@{/busca}" method="get" class="search-form">
+                    <input type="text" id="search-input" name="q" placeholder="O que você está procurando?">
+                    <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <div class="user-actions" id="user-actions-container">
+                <a th:href="@{/carrinho}" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-text">Carrinho</span>
+                    <span class="cart-count" id="cart-count" th:text="${quantidadeCarrinho != null ? quantidadeCarrinho : 0}">0</span>
+                </a>
+
+                <div class="user-dropdown" th:if="${usuarioLogado != null}">
+                    <button class="user-menu-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span th:text="${usuarioLogado.nome}">Usuário</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown-content">
+                        <a th:href="@{/minha-conta}"><i class="fas fa-user"></i> Minha Conta</a>
+                        <a th:href="@{/minha-loja}" th:if="${usuarioLogado.tipo == 'VENDEDOR'}"><i class="fas fa-store"></i> Minha Loja</a>
+                        <a th:href="@{/meus-pedidos}"><i class="fas fa-shopping-bag"></i> Meus Pedidos</a>
+                        <a th:href="@{/meus-favoritos}"><i class="fas fa-heart"></i> Favoritos</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                    </div>
+                </div>
+
+                <div class="auth-buttons" th:if="${usuarioLogado == null}">
+                    <a th:href="@{/login}" class="btn-login">Entrar</a>
+                    <a th:href="@{/registro}" class="btn-register">Cadastrar</a>
+                </div>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul id="nav-menu">
+                    <li><a th:href="@{/lojas}"><i class="fas fa-store"></i> Lojas</a></li>
+                    <li><a th:href="@{/ofertas}"><i class="fas fa-tag"></i> Ofertas</a></li>
+                    <li><a th:href="@{/lancamentos}"><i class="fas fa-bullhorn"></i> Lançamentos</a></li>
+                    <li><a th:href="@{/destaques}"><i class="fas fa-star"></i> Destaques</a></li>
+                    <li><a th:href="@{/categorias}"><i class="fas fa-th-large"></i> Categorias</a></li>
+                    <li><a th:href="@{/ajuda}"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Na Loja Tem - Marketplace</title>
+    <!-- CSS Globais -->
+    <link rel="stylesheet" th:href="@{/estilos/style.css}">
+    <!-- CSS Específico da Home -->
+    <link rel="stylesheet" th:href="@{/estilos/home.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="cabecalho :: header"></header>
+
+<main>
+    <section class="destaques">
+        <div class="container">
+            <h2 class="section-title">Produtos em Destaque</h2>
+            <div class="carrossel-container">
+                <button class="carrossel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carrossel-btn next"><i class="fas fa-chevron-right"></i></button>
+
+                <div class="carrossel" th:if="${not #lists.isEmpty(produtosDestaque)}">
+                    <div class="produto-card" th:each="produto : ${produtosDestaque}">
+                        <div class="produto-img">
+                            <img th:src="${produto.fotoUrl != null ? produto.fotoUrl : '/imagens/placeholder.png'}"
+                                 th:alt="${produto.nome}">
+                        </div>
+                        <div class="produto-info">
+                            <h3 th:text="${produto.nome}">Nome do Produto</h3>
+                            <p class="produto-descricao" th:text="${produto.descricao}">Descrição do produto</p>
+                            <div class="produto-preco" th:text="${'R$ ' + #numbers.formatDecimal(produto.preco, 1, 2, 'POINT')}">R$ 0,00</div>
+                            <div class="produto-acoes">
+                                <button class="btn-comprar" th:data-produto-id="${produto.id}">Comprar</button>
+                                <button class="btn-favorito" th:data-produto-id="${produto.id}"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${#lists.isEmpty(produtosDestaque)}" class="mensagem-vazia">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Nenhum produto em destaque</h3>
+                    <p>Em breve teremos novidades para você!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categorias">
+        <div class="container">
+            <h2 class="section-title">Navegue por Categorias</h2>
+            <div class="categorias-grid">
+                <a th:href="@{/lojas?categoria=construcao}" class="categoria-card">
+                    <img th:src="@{/imagens/categorias/construcao.jpg}" alt="Construção">
+                    <h3>Construção</h3>
+                </a>
+                <a th:href="@{/lojas?categoria=papelaria}" class="categoria-card">
+                    <img th:src="@{/imagens/categorias/papelaria.jpg}" alt="Papelaria">
+                    <h3>Papelaria</h3>
+                </a>
+                <a th:href="@{/lojas?categoria=games}" class="categoria-card">
+                    <img th:src="@{/imagens/categorias/games.jpg}" alt="Games">
+                    <h3>Games</h3>
+                </a>
+                <a th:href="@{/lojas?categoria=esportes}" class="categoria-card">
+                    <img th:src="@{/imagens/categorias/esportes.jpg}" alt="Esportes">
+                    <h3>Esportes</h3>
+                </a>
+                <a th:href="@{/lojas?categoria=livros}" class="categoria-card">
+                    <img th:src="@{/imagens/categorias/livros.jpg}" alt="Livros">
+                    <h3>Livros</h3>
+                </a>
+                <a th:href="@{/lojas?categoria=roupas}" class="categoria-card">
+                    <img th:src="@{/imagens/categorias/roupas.jpg}" alt="Roupas">
+                    <h3>Roupas</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="recomendados">
+        <div class="container">
+            <h2 class="section-title">Lojas Recomendadas</h2>
+            <div class="lojas-grid" th:if="${not #lists.isEmpty(lojas)}">
+                <a th:href="@{/loja/{id}(id=${loja.id})}" class="loja-card" th:each="loja : ${lojas}">
+                    <img th:src="${loja.foto != null ? loja.foto : '/imagens/placeholder_loja.png'}"
+                         th:alt="${loja.nome}">
+                    <h3 th:text="${loja.nome}">Nome da Loja</h3>
+                </a>
+            </div>
+            <div th:if="${#lists.isEmpty(lojas)}" class="mensagem-vazia">
+                <i class="fas fa-store-slash"></i>
+                <h3>Nenhuma loja encontrada</h3>
+                <p>Em breve teremos lojas incríveis para você conhecer!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="favoritos" th:if="${usuarioLogado != null}">
+        <div class="container">
+            <h2 class="section-title">Seus Favoritos</h2>
+            <div class="favoritos-grid">
+                <div class="mensagem-vazia">
+                    <i class="fas fa-heart"></i>
+                    <h3>Nenhum favorito ainda</h3>
+                    <p>Explore nossos produtos e adicione seus favoritos!</p>
+                    <a th:href="@{/lojas}" class="btn btn-primary mt-20">
+                        <i class="fas fa-store"></i> Explorar Lojas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Tem uma loja?</h2>
+            <p>Junte-se ao Na Loja Tem e alcance milhares de novos clientes!</p>
+            <a th:href="@{/cadastro-loja}" class="btn-cta" id="btn-criar-loja">
+                <i class="fas fa-plus"></i> Crie sua loja
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="rodape :: footer"></footer>
+
+<!-- Scripts Globais -->
+<script th:src="@{/scripts/global.js}"></script>
+<!-- Scripts Específicos da Home -->
+<script th:src="@{/scripts/home.js}"></script>
+</body>
+</html>

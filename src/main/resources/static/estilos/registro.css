@@ -1,0 +1,22 @@
+/* PÁGINA DE REGISTRO */
+.terms {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.terms input {
+    margin-top: 3px;
+}
+
+.terms a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}

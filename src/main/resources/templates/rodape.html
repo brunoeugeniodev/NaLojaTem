@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<footer th:fragment="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3><i class="fas fa-store"></i> Na Loja Tem</h3>
+                <ul>
+                    <li><a th:href="@{/sobre}"><i class="fas fa-info-circle"></i> Sobre nós</a></li>
+                    <li><a th:href="@{/como-funciona}"><i class="fas fa-question-circle"></i> Como funciona</a></li>
+                    <li><a th:href="@{/privacidade}"><i class="fas fa-shield-alt"></i> Política de privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3><i class="fas fa-headset"></i> Ajuda</h3>
+                <ul>
+                    <li><a th:href="@{/contato}"><i class="fas fa-envelope"></i> Fale conosco</a></li>
+                    <li><a th:href="@{/faq}"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a th:href="@{/termos}"><i class="fas fa-file-contract"></i> Termos de uso</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3><i class="fas fa-hashtag"></i> Redes sociais</h3>
+                <ul>
+                    <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3><i class="fas fa-user-tie"></i> Para Lojistas</h3>
+                <ul>
+                    <li><a th:href="@{/cadastro-loja}"><i class="fas fa-store-alt"></i> Cadastre sua loja</a></li>
+                    <li><a th:href="@{/minha-loja}"><i class="fas fa-chart-line"></i> Área do vendedor</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2024</span> Na Loja Tem. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

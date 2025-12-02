@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja | Na Loja Tem</title>
+    <!-- CSS Globais -->
+    <link rel="stylesheet" th:href="@{/estilos/style.css}">
+    <!-- CSS Específico da Minha Loja -->
+    <link rel="stylesheet" th:href="@{/estilos/minha-loja.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="cabecalho :: header"></header>
+
+<main class="dashboard" th:if="${usuarioLogado != null}">
+    <div class="container">
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="user-profile">
+                    <img th:src="${usuarioLogado.foto != null ? usuarioLogado.foto : '/imagens/default-avatar.png'}"
+                         class="user-avatar" alt="Avatar">
+                    <div class="user-name" th:text="${usuarioLogado.nome}">Usuário</div>
+                    <div class="user-email" th:text="${usuarioLogado.email}">email@exemplo.com</div>
+                    <div class="user-role" th:text="${usuarioLogado.tipo}">Tipo de conta</div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="#pedidos"><i class="fas fa-shopping-bag"></i> Pedidos</a></li>
+                        <li><a href="#produtos"><i class="fas fa-box"></i> Produtos</a></li>
+                        <li><a th:href="@{/loja/{id}(id=${lojaUsuario.id})}" th:if="${lojaUsuario != null}"><i class="fas fa-store"></i> Minha Loja</a></li>
+                        <li><a href="#vendas"><i class="fas fa-chart-line"></i> Vendas</a></li>
+                        <li><a href="#mensagens"><i class="fas fa-envelope"></i> Mensagens</a></li>
+                        <li><a href="#configuracoes"><i class="fas fa-cog"></i> Configurações</a></li>
+                        <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="dashboard-content">
+                <div class="dashboard-section active" id="dashboard-content">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Pedidos Hoje</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="stat-value">R$ 0,00</div>
+                            <div class="stat-label">Vendas Hoje</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Visualizações</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-box"></i></div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Produtos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main th:if="${usuarioLogado == null}" class="auth-required">
+    <div class="container">
+        <div class="auth-required-message">
+            <i class="fas fa-lock"></i>
+            <h2>Acesso Restrito</h2>
+            <p>Você precisa estar logado para acessar esta página.</p>
+            <a th:href="@{/login}" class="btn btn-primary">Fazer Login</a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="rodape :: footer"></footer>
+
+<!-- Scripts Globais -->
+<script th:src="@{/scripts/global.js}"></script>
+<!-- Scripts Específicos da Minha Loja -->
+<script th:src="@{/scripts/minha-loja.js}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Logout
+        const logoutLink = document.getElementById('logout-link');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                fazerLogout();
+            });
+        }
+    });
+</script>
+</body>
+</html>

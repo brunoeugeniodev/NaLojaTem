@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras | Na Loja Tem</title>
+    <!-- CSS Globais -->
+    <link rel="stylesheet" th:href="@{/estilos/style.css}">
+    <!-- CSS Específico do Carrinho -->
+    <link rel="stylesheet" th:href="@{/estilos/carrinho.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header th:replace="cabecalho :: header"></header>
+
+<main class="cart-container">
+    <div class="container">
+        <h1 class="page-title"><i class="fas fa-shopping-cart"></i> Carrinho de Compras</h1>
+
+        <div class="cart-content" th:if="${not #lists.isEmpty(itensCarrinho)}">
+            <div class="cart-items">
+                <div class="cart-header">
+                    <div class="cart-col produto">Produto</div>
+                    <div class="cart-col preco">Preço</div>
+                    <div class="cart-col quantidade">Quantidade</div>
+                    <div class="cart-col total">Total</div>
+                    <div class="cart-col acoes">Ações</div>
+                </div>
+
+                <div class="cart-item" th:each="item : ${itensCarrinho}">
+                    <div class="cart-col produto">
+                        <img th:src="${item.produto.fotoUrl != null ? item.produto.fotoUrl : '/imagens/placeholder.png'}"
+                             th:alt="${item.produto.nome}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <h4 th:text="${item.produto.nome}">Nome do Produto</h4>
+                            <p class="cart-item-store" th:text="${item.produto.loja.nome}">Nome da Loja</p>
+                        </div>
+                    </div>
+                    <div class="cart-col preco" th:text="${'R$ ' + #numbers.formatDecimal(item.produto.preco, 1, 2, 'POINT')}">R$ 0,00</div>
+                    <div class="cart-col quantidade">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus" th:data-item-id="${item.id}">-</button>
+                            <input type="number" class="quantity-input" th:value="${item.quantidade}" min="1" max="99" th:data-item-id="${item.id}">
+                            <button class="quantity-btn plus" th:data-item-id="${item.id}">+</button>
+                        </div>
+                    </div>
+                    <div class="cart-col total" th:text="${'R$ ' + #numbers.formatDecimal(item.produto.preco * item.quantidade, 1, 2, 'POINT')}">R$ 0,00</div>
+                    <div class="cart-col acoes">
+                        <button class="btn-remove" th:data-item-id="${item.id}" title="Remover item">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-summary">
+                <h3>Resumo do Pedido</h3>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span class="value" id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Frete</span>
+                    <span class="value" id="frete">R$ 0,00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Desconto</span>
+                    <span class="value" id="desconto">R$ 0,00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span class="value" id="total">R$ 0,00</span>
+                </div>
+
+                <div class="cupom-section">
+                    <input type="text" id="cupom-input" placeholder="Código do cupom">
+                    <button id="btn-aplicar-cupom">Aplicar</button>
+                </div>
+
+                <button class="btn btn-primary" id="btn-finalizar-compra" style="width: 100%; margin-top: 20px;">
+                    <i class="fas fa-credit-card"></i> Finalizar Compra
+                </button>
+
+                <a th:href="@{/}" class="btn btn-outline" style="width: 100%; margin-top: 10px; text-align: center;">
+                    <i class="fas fa-arrow-left"></i> Continuar Comprando
+                </a>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(itensCarrinho)}" class="empty-cart">
+            <i class="fas fa-shopping-cart fa-4x"></i>
+            <h2>Seu carrinho está vazio</h2>
+            <p>Adicione produtos ao carrinho para finalizar sua compra</p>
+            <a th:href="@{/}" class="btn btn-primary">
+                <i class="fas fa-shopping-bag"></i> Continuar Comprando
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="rodape :: footer"></footer>
+
+<!-- Scripts Globais -->
+<script th:src="@{/scripts/global.js}"></script>
+<!-- Scripts Específicos do Carrinho -->
+<script th:src="@{/scripts/carrinho.js}"></script>
+</body>
+</html>
